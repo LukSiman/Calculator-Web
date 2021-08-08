@@ -4,32 +4,47 @@ const display = document.querySelector('#display');
 const clear = document.querySelector('#clear');
 const solve = document.querySelector('#solve');
 const decimal = document.querySelector('#decimal');
+const back = document.querySelector('#back');
 
 let clearedValue = true;
-let firstValue;
-let secondValue;
+let firstOperand;
+let secondOperand;
 let operator;
 
+document.addEventListener('keydown', (key) => {
+    let button = key.key;
+    if (isFinite(button)) {
+        numberLogic(button);
+    }
+
+});
+
+//Add numbers to the display
 numbers.forEach((button) => {
     button.addEventListener('click', () => {
-        const length = display.textContent.length;
-
-        if (clearedValue) {
-            display.textContent = button.textContent;
-            clearedValue = false;
-        } else {
-            if (length <= 14) {
-                display.textContent += button.textContent;
-            }
-        }    
+        numberLogic(button.textContent);
     });
 });
 
+//Functionality for number buttons
+function numberLogic(button) {
+    if (clearedValue) {
+        display.textContent = button;
+        clearedValue = false;
+    } else {
+        if (display.textContent.length <= 14) {
+            display.textContent += button;
+        }
+    }
+}
+
+//Set the operator
 operators.forEach((button) => {
     button.addEventListener('click', () => {
-        checkValuePosition();
+        checkOperandPosition();
 
-        if (operator !== undefined && secondValue !== undefined) {
+        // if operator was already set solve the operation
+        if (operator !== undefined && secondOperand !== undefined) {
             solveDisplay();
         }
 
@@ -37,6 +52,7 @@ operators.forEach((button) => {
     });
 });
 
+//Add decimal if no decimals are already added
 decimal.addEventListener('click', () => {
     if(!display.textContent.includes('.')){
         display.textContent += decimal.textContent;
@@ -44,14 +60,9 @@ decimal.addEventListener('click', () => {
     }   
 });
 
-clear.addEventListener('click', () => {
-    display.textContent = '0';
-    display.style.fontSize = '25px';
-    clearValues();
-});
-
+//Solve the operation
 solve.addEventListener('click', () =>{
-    checkValuePosition();
+    checkOperandPosition();
 
     if(!clearedValue && operator !== undefined){
         solveDisplay();
@@ -59,31 +70,51 @@ solve.addEventListener('click', () =>{
         if(display.textContent.length >16){
             display.style.fontSize = '21px';
         }
-        
+
         clearValues();
     }
 });
 
-function checkValuePosition() {
+//Clear the display
+clear.addEventListener('click', () => {
+    display.textContent = '0';
+    display.style.fontSize = '25px';
+    clearValues();
+});
+
+//Backspace on entered numbers
+back.addEventListener('click', () => {
+    display.textContent = display.textContent.slice(0, length-1);
+    if(display.textContent === ''){
+        display.textContent = 0;
+        clearedValue = true;
+    }
+});
+
+//Sets first and second operand according to operator value
+function checkOperandPosition() {
     if (operator === undefined) {
-        firstValue = display.textContent;
+        firstOperand = display.textContent;
         clearedValue = true;
     } else {
-        secondValue = display.textContent;
+        secondOperand = display.textContent;
     }    
 }
 
+//Solves the operation
 function solveDisplay(){
-    display.textContent = operate(operator, Number(firstValue), Number(secondValue));
+    display.textContent = operate(operator, Number(firstOperand), Number(secondOperand));
 }
 
+//Clears values to default 
 function clearValues(){
     clearedValue = true;
     operator = undefined;
-    firstValue = undefined;
-    secondValue = undefined;
+    firstOperand = undefined;
+    secondOperand = undefined;
 }
 
+//Calls math function according to operator value
 function operate(operator, numberOne, numberTwo){
     switch(operator){
         case "+":
@@ -97,20 +128,24 @@ function operate(operator, numberOne, numberTwo){
     }
 }
 
+//Calculates addition
 function add(numberOne, numberTwo){
     return Math.round((numberOne + numberTwo) * 100) / 100;
 }
 
+//Calculates subtraction
 function subtract(numberOne, numberTwo){
     return Math.round((numberOne - numberTwo) * 100) / 100;
 }
 
+//Calculates multiplication
 function multipy(numberOne, numberTwo){
     return Math.round((numberOne * numberTwo) * 100) / 100;
 }
 
+//Calculates division
 function divide(numberOne, numberTwo){
-    if(secondValue == 0){
+    if(secondOperand == 0){
         display.style.fontSize = '19px';
         return 'Nuclear missile launched!';
     }

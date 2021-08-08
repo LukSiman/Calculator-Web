@@ -52,7 +52,15 @@ ID SELECTORS
 }
 
 #buttons>#clear{
-  grid-column: span 4;
+  grid-column: span 2;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #C1121F;
+  color: #FDF0D5;
+}
+
+#buttons>#back{
+  grid-column: span 2;
   height: 40px;
   border-radius: 10px;
   background-color: #C1121F;
