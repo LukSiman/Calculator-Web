@@ -11,12 +11,19 @@ let firstOperand;
 let secondOperand;
 let operator;
 
+//Takes keyboard inputs and calls the correct function
 document.addEventListener('keydown', (key) => {
     let button = key.key;
+
     if (isFinite(button)) {
         numberLogic(button);
-    }
-
+    } else if(button.match(/^(\*|\-|\+|\/)$/)){
+        console.log(button);
+        operatorLogic(button);
+    } else if(button.match(/^(.)$/)){
+        console.log(button);
+        decimalLogic(button);
+    }  
 });
 
 //Add numbers to the display
@@ -26,39 +33,25 @@ numbers.forEach((button) => {
     });
 });
 
-//Functionality for number buttons
-function numberLogic(button) {
-    if (clearedValue) {
-        display.textContent = button;
-        clearedValue = false;
-    } else {
-        if (display.textContent.length <= 14) {
-            display.textContent += button;
-        }
-    }
-}
-
 //Set the operator
 operators.forEach((button) => {
     button.addEventListener('click', () => {
-        checkOperandPosition();
-
-        // if operator was already set solve the operation
-        if (operator !== undefined && secondOperand !== undefined) {
-            solveDisplay();
-        }
-
-        operator = button.textContent;
+        operatorLogic(button.textContent);
     });
 });
 
 //Add decimal if no decimals are already added
 decimal.addEventListener('click', () => {
-    if(!display.textContent.includes('.')){
-        display.textContent += decimal.textContent;
-        clearedValue = false;
-    }   
+    decimalLogic(decimal.textContent);
 });
+
+//Functionality for decimal
+function decimalLogic(button) {
+    if (!display.textContent.includes('.')) {
+        display.textContent += button;
+        clearedValue = false;
+    }
+}
 
 //Solve the operation
 solve.addEventListener('click', () =>{
@@ -90,6 +83,30 @@ back.addEventListener('click', () => {
         clearedValue = true;
     }
 });
+
+//Functionality for number buttons
+function numberLogic(button) {
+    if (clearedValue) {
+        display.textContent = button;
+        clearedValue = false;
+    } else {
+        if (display.textContent.length <= 14) {
+            display.textContent += button;
+        }
+    }
+}
+
+//Functionality for operator buttons
+function operatorLogic(button){
+    checkOperandPosition();
+
+    // if operator was already set solve the operation
+    if (operator !== undefined && secondOperand !== undefined) {
+        solveDisplay();
+    }
+
+    operator = button;
+};
 
 //Sets first and second operand according to operator value
 function checkOperandPosition() {
