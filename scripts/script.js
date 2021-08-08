@@ -14,16 +14,17 @@ let operator;
 //Takes keyboard inputs and calls the correct function
 document.addEventListener('keydown', (key) => {
     let button = key.key;
-
-    if (isFinite(button)) {
+ 
+    if (isFinite(button)) {        
         numberLogic(button);
     } else if(button.match(/^(\*|\-|\+|\/)$/)){
-        console.log(button);
         operatorLogic(button);
-    } else if(button.match(/^(.)$/)){
-        console.log(button);
+    } else if(button.match(/^(\.)$/)){
         decimalLogic(button);
+    }  else if(button.match(/^(Enter|\=)$/)){
+       console.log(button);
     }  
+    
 });
 
 //Add numbers to the display
