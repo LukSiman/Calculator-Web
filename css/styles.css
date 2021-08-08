@@ -29,10 +29,13 @@ ID SELECTORS
 **********************************************/
 
 #calculator{
-  border: 1px solid black;
+  border: 2px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #669BBC;
+  border-radius: 10px;
+
 }
 
 #buttons{
@@ -51,6 +54,21 @@ ID SELECTORS
 #buttons>#clear{
   grid-column: span 4;
   height: 40px;
+  border-radius: 10px;
+  background-color: #C1121F;
+  color: #FDF0D5;
+}
+
+#decimal{
+  background-color: #005D8F;
+  border-radius: 10px;
+  color: #FDF0D5;
+}
+
+#solve{
+  border-radius: 10px;
+  background-color: #C1121F;
+  color: #FDF0D5;
 }
 
 #display{
@@ -66,13 +84,26 @@ ID SELECTORS
   line-height: 70px;
   border: 1px solid black;
   font-weight: bold;
+  border-radius: 10px;
+  background-color: #FDF0D5;
+  color: #003049;
 }
 
 /**********************************************
 CLASS SELECTORS
 **********************************************/
 
+.number{
+  background-color: #003049;
+  border-radius: 10px;
+  color: #FDF0D5;
+}
 
+.operator{
+  background-color: #780000;
+  border-radius: 10px;
+  color: #FDF0D5;
+}
 
 /**********************************************
 MEDIA 
