@@ -1,0 +1,80 @@
+@import url("reset.css");
+
+/**********************************************
+GLOBAL VARIABLES
+**********************************************/
+
+
+/**********************************************
+HTML SELECTORS
+**********************************************/
+
+html {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+main{
+  margin: auto;
+  margin-top: 60px;
+  width: 260px;
+}
+
+/**********************************************
+ID SELECTORS 
+**********************************************/
+
+#calculator{
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#buttons{
+  margin-bottom: 5px;
+  display: grid;
+  grid-template-columns: repeat(4, 60px);
+  grid-gap: 3px;
+}
+
+#buttons>button{
+  height: 60px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#buttons>#clear{
+  grid-column: span 4;
+  height: 40px;
+}
+
+#display{
+  margin-top: 10px;
+  margin-bottom: 7px;
+  text-align: right;
+  align-self: stretch;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 0px 3px 0px 3px;
+  font-size: 25px;
+  height: 70px;
+  line-height: 70px;
+  border: 1px solid black;
+  font-weight: bold;
+}
+
+/**********************************************
+CLASS SELECTORS
+**********************************************/
+
+
+
+/**********************************************
+MEDIA 
+**********************************************/
+
