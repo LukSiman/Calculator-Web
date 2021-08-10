@@ -21,11 +21,10 @@ document.addEventListener('keydown', (key) => {
         operatorLogic(button);
     } else if (button.match(/^(\.)$/)) {
         decimalLogic(button);
-    } else if (button.match(/^(Enter|\=)$/)) {
+    } else if (button.match(/^(\=)$/)) {
         solveLogic();
     } else if(button.match(/^(Backspace)$/)){
-        console.log(button);
-
+        backspaceLogic();
     }
 
     //add click on keyboard?
@@ -109,15 +108,16 @@ clear.addEventListener('click', () => {
 });
 
 //Backspace on entered numbers
-back.addEventListener('click', () => {
+back.addEventListener('click', backspaceLogic);
+
+//Functionality for deleting numbers from display
+function backspaceLogic(){
     display.textContent = display.textContent.slice(0, length - 1);
     if (display.textContent === '') {
         display.textContent = 0;
         clearedValue = true;
     }
-});
-
-
+}
 
 //Sets first and second operand according to operator value
 function checkOperandPosition() {
