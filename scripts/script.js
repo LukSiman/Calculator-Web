@@ -1,6 +1,7 @@
 const numbers = document.querySelectorAll('.number');
 const operators = document.querySelectorAll('.operator');
 const display = document.querySelector('#display');
+const tracker = document.querySelector('#tracker');
 const clear = document.querySelector('#clear');
 const solve = document.querySelector('#solve');
 const decimal = document.querySelector('#decimal');
@@ -13,9 +14,9 @@ let operator;
 
 
 //Prevent enter from firing focused buttons
-document.addEventListener('keydown', function (e) {
-    if (e.code === 13 || e.key === 'Enter') {
-        e.preventDefault();
+document.addEventListener('keydown', function (key) {
+    if (key.code === 13 || key.key === 'Enter') {
+        key.preventDefault();
         return false;
     }    
 });
@@ -65,15 +66,35 @@ operators.forEach((button) => {
 
 //Functionality for operator buttons
 function operatorLogic(button) {
+    
     checkOperandPosition();
+
+   /* if(operator !== undefined && secondOperand !== undefined){
+        tracker.textContent = firstOperand + operator + secondOperand + '=';
+    } else if(operator !== undefined && secondOperand === undefined){
+        tracker.textContent = firstOperand + operator;
+    }*/
+
+    //FINISH MINI DISPLAY
 
     // if operator was already set solve the operation
     if (operator !== undefined && secondOperand !== undefined) {
         solveDisplay();
     }
 
-    operator = button;
+    operator = button;  
+    
 };
+
+//Sets first and second operand according to operator value
+function checkOperandPosition() {
+    if (operator === undefined) {
+        firstOperand = display.textContent;
+        clearedValue = true;
+    } else {
+        secondOperand = display.textContent;
+    }
+}
 
 //Add decimal if no decimals are already added
 decimal.addEventListener('click', () => {
@@ -101,6 +122,19 @@ function solveLogic() {
     }
 }
 
+//Solves the operation
+function solveDisplay() {
+    display.textContent = operate(operator, Number(firstOperand), Number(secondOperand));
+    
+    operator = undefined;    
+    clearedValue = true;
+    firstOperand = display.textContent;
+
+    if (display.textContent.length > 16) {
+        display.style.fontSize = '22px';
+    }
+}
+
 //Clear the display
 clear.addEventListener('click', () => {
     display.textContent = '0';
@@ -120,31 +154,13 @@ function backspaceLogic() {
     }
 }
 
-//Sets first and second operand according to operator value
-function checkOperandPosition() {
-    if (operator === undefined) {
-        firstOperand = display.textContent;
-        clearedValue = true;
-    } else {
-        secondOperand = display.textContent;
-    }
-}
-
-//Solves the operation
-function solveDisplay() {
-    display.textContent = operate(operator, Number(firstOperand), Number(secondOperand));
-
-    if (display.textContent.length > 16) {
-        display.style.fontSize = '22px';
-    }
-}
-
 //Clears values to default 
 function clearValues() {
     clearedValue = true;
     operator = undefined;
     firstOperand = undefined;
     secondOperand = undefined;
+    tracker.textContent = '';
 }
 
 //Calls math function according to operator value

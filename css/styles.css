@@ -83,7 +83,7 @@ ID SELECTORS
   color: #FDF0D5;
 }
 
-#display{
+#screen{
   margin-top: 10px;
   margin-bottom: 7px;
   text-align: right;
@@ -93,16 +93,20 @@ ID SELECTORS
   padding: 0px 3px 0px 3px;
   font-size: 25px;
   height: 70px;
-  line-height: 70px;
+  line-height: 30px;
   border: 1px solid black;
   font-weight: bold;
   border-radius: 10px;
   background-color: #FDF0D5;
   color: #003049;
-  display: block;
+  display: grid;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+#tracker{
+  font-size: 18px;
 }
 
 /**********************************************
