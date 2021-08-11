@@ -11,6 +11,7 @@ let firstOperand;
 let secondOperand;
 let operator;
 
+
 //Takes keyboard inputs and calls the correct function
 document.addEventListener('keydown', (key) => {
     let button = key.key;
@@ -91,11 +92,6 @@ function solveLogic() {
 
     if (!clearedValue && operator !== undefined) {
         solveDisplay();
-
-        if (display.textContent.length > 16) {
-            display.style.fontSize = '21px';
-        }
-
         clearValues();
     }
 }
@@ -132,6 +128,10 @@ function checkOperandPosition() {
 //Solves the operation
 function solveDisplay() {
     display.textContent = operate(operator, Number(firstOperand), Number(secondOperand));
+
+    if (display.textContent.length > 16) {
+        display.style.fontSize = '22px';
+    }
 }
 
 //Clears values to default 

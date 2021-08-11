@@ -95,6 +95,10 @@ ID SELECTORS
   border-radius: 10px;
   background-color: #FDF0D5;
   color: #003049;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /**********************************************
