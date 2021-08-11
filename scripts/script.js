@@ -12,6 +12,14 @@ let secondOperand;
 let operator;
 
 
+//Prevent enter from firing focused buttons
+document.addEventListener('keydown', function (e) {
+    if (e.code === 13 || e.key === 'Enter') {
+        e.preventDefault();
+        return false;
+    }    
+});
+
 //Takes keyboard inputs and calls the correct function
 document.addEventListener('keydown', (key) => {
     let button = key.key;
@@ -22,14 +30,11 @@ document.addEventListener('keydown', (key) => {
         operatorLogic(button);
     } else if (button.match(/^(\.)$/)) {
         decimalLogic(button);
-    } else if (button.match(/^(\=)$/)) {
+    } else if (button.match(/^(Enter|\=)$/)) {
         solveLogic();
-    } else if(button.match(/^(Backspace)$/)){
+    } else if (button.match(/^(Backspace)$/)) {
         backspaceLogic();
     }
-
-    //add click on keyboard?
-
 });
 
 //Add numbers to the display
@@ -107,7 +112,7 @@ clear.addEventListener('click', () => {
 back.addEventListener('click', backspaceLogic);
 
 //Functionality for deleting numbers from display
-function backspaceLogic(){
+function backspaceLogic() {
     display.textContent = display.textContent.slice(0, length - 1);
     if (display.textContent === '') {
         display.textContent = 0;
