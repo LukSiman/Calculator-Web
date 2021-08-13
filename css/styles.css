@@ -39,7 +39,6 @@ ID SELECTORS
   align-items: center;
   background-color: #669BBC;
   border-radius: 10px;
-
 }
 
 #buttons{
@@ -95,20 +94,21 @@ ID SELECTORS
   color: #003049;
   display: grid;
   grid-template-rows: 24px 40px;
-  justify-items: end;
-  align-items: center;  
+  text-align: right;
+  align-items: center; 
+}
+
+#tracker{
+  font-size: 16px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 }
 
-#tracker{
-  font-size: 16px;
-  min-width: 0;
-}
-
 #display{
-  min-width: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /**********************************************
