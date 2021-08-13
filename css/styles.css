@@ -84,29 +84,31 @@ ID SELECTORS
 }
 
 #screen{
-  margin-top: 10px;
-  margin-bottom: 7px;
-  text-align: right;
   align-self: stretch;
-  margin-left: 5px;
-  margin-right: 5px;
-  padding: 0px 3px 0px 3px;
+  margin: 10px 5px 10px 5px;
+  padding: 5px 5px 5px 5px;
   font-size: 25px;
-  height: 70px;
-  line-height: 30px;
   border: 1px solid black;
   font-weight: bold;
   border-radius: 10px;
   background-color: #FDF0D5;
   color: #003049;
   display: grid;
+  grid-template-rows: 24px 40px;
+  justify-items: end;
+  align-items: center;  
+  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 #tracker{
-  font-size: 18px;
+  font-size: 16px;
+  min-width: 0;
+}
+
+#display{
+  min-width: 0;
 }
 
 /**********************************************

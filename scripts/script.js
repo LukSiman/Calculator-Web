@@ -47,6 +47,11 @@ numbers.forEach((button) => {
 
 //Functionality for number buttons
 function numberLogic(button) {
+
+    if(clearedValue && firstOperand === undefined){
+        tracker.textContent = '';
+    }
+
     if (clearedValue) {
         display.textContent = button;
         clearedValue = false;
@@ -54,6 +59,10 @@ function numberLogic(button) {
         if (display.textContent.length <= 14) {
             display.textContent += button;
         }
+    }
+
+    if(operator !== undefined){
+        secondOperand = display.textContent;
     }
 }
 
@@ -69,21 +78,17 @@ function operatorLogic(button) {
     
     checkOperandPosition();
 
-   /* if(operator !== undefined && secondOperand !== undefined){
-        tracker.textContent = firstOperand + operator + secondOperand + '=';
-    } else if(operator !== undefined && secondOperand === undefined){
-        tracker.textContent = firstOperand + operator;
-    }*/
-
-    //FINISH MINI DISPLAY
-
     // if operator was already set solve the operation
     if (operator !== undefined && secondOperand !== undefined) {
         solveDisplay();
+        secondOperand = undefined;
     }
 
-    operator = button;  
-    
+    operator = button;   
+
+    if(operator !== undefined){
+        tracker.textContent = firstOperand + ' ' + operator;
+    }
 };
 
 //Sets first and second operand according to operator value
@@ -91,8 +96,6 @@ function checkOperandPosition() {
     if (operator === undefined) {
         firstOperand = display.textContent;
         clearedValue = true;
-    } else {
-        secondOperand = display.textContent;
     }
 }
 
@@ -114,10 +117,9 @@ solve.addEventListener('click', solveLogic);
 
 //Functionality for solving the calculation
 function solveLogic() {
-    checkOperandPosition();
-
     if (!clearedValue && operator !== undefined) {
         solveDisplay();
+        tracker.textContent = tracker.textContent + ' ' + secondOperand + ' = ';
         clearValues();
     }
 }
@@ -138,6 +140,7 @@ function solveDisplay() {
 //Clear the display
 clear.addEventListener('click', () => {
     display.textContent = '0';
+    tracker.textContent = '';
     display.style.fontSize = '25px';
     clearValues();
 });
@@ -159,8 +162,7 @@ function clearValues() {
     clearedValue = true;
     operator = undefined;
     firstOperand = undefined;
-    secondOperand = undefined;
-    tracker.textContent = '';
+    secondOperand = undefined;    
 }
 
 //Calls math function according to operator value
